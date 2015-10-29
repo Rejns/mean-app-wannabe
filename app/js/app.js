@@ -5,6 +5,10 @@ angular.module("app",["ngRoute"])
 				templateUrl: 'view/login.tpl.html',
 				controller: 'LoginController'
 			})
+			.when('/user-details/:username', {
+				templateUrl: 'view/user-details.tpl.html',
+				controller: 'UserDetailsController'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});

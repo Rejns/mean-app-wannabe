@@ -1,28 +1,24 @@
 angular.module("app")
-	.controller("LoginController", ["$scope", "security", "$window", "Users", function($scope, security, $window, users) {
+	.controller("LoginController", ["$scope", "security", "Users", "$location", function($scope, security, users, $location) {
+		
 		$scope.username ="username";
 		$scope.password ="password";
 		$scope.login = login;
-		$scope.getAll = getAll;
-
 
 		function login() {
 			security.login($scope.username, $scope.password)
-			.then(function(response) {
-				$window.localStorage.token = response.data.token;
-				console.log("logged in");
+			.then(function(){
+				if(security.getCurrentUser() !== null) {
+					var user = security.getCurrentUser();
+					$location.path('/user-details/'+user);
+				}
 			}, function(error) {
-				console.log(error);
+				if(error.status === 400) {
+					$scope.errorMessage  = "Username does not exist!";
+				}
+				if(error.status === 401)
+					$scope.errorMessage = "Invalid password!";
 			});
-		}
-
-		function getAll() {
-			users.getAll().then(function(response){
-					console.log(response);
-					$scope.users = response;
-				}, function(error) {
-					$scope.users = error;
-				});
 		}
 
 	}]);
