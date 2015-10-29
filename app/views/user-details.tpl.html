@@ -1,1 +1,10 @@
 <h2> User details: </h2>
+<div> Username: {{ username }} </div>
+<div> Role: {{ access }} </div>
+<div> {{ errorMessage }} </div>
+
+<h2> Special admin view </h2>
+<h3> List of registered users </h3>
+<li ng-repeat="user in users">
+	{{ user.username }}
+</li>
