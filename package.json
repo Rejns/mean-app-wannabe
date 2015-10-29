@@ -1,0 +1,11 @@
+{
+  "name": "express-jwt-api",
+  "version": "1.0.0",
+  "description": "express api using jwt auth",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rejns",
+  "license": "ISC"
+}
