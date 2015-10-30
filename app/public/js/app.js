@@ -12,6 +12,10 @@ angular.module("app",["ngRoute"])
 			.when('/home', {
 				templateUrl: 'views/home.tpl.html'
 			})
+			.when('/users-list', {
+				templateUrl: 'views/users-list.tpl.html',
+				controller: 'UsersListController'
+			})
 			.otherwise({
 				redirectTo: '/home'
 			});

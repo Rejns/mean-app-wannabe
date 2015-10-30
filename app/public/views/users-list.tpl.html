@@ -1,0 +1,17 @@
+<div class="container">
+	<div> {{ errorMessage }}
+	<table ng-hide="authError" class="table">
+		<thead>
+			<tr>
+				<th> Username </th>
+				<th> Access </th>
+			</tr>
+		</thead>
+			<tbody>	
+			<tr ng-repeat="user in users">
+				<td> {{ user.username }} </td>
+				<td> {{ user.access }} </td>
+			</tr>	
+		</tbody>
+	</table>
+</div>

@@ -57,7 +57,7 @@ app.get('/api/users', function(req, res) {
 				});
 			}
 			else
-				res.json([]);
+				res.sendStatus(401);
 		}
 	});
 	
