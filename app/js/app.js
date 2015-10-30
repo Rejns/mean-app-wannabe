@@ -9,8 +9,11 @@ angular.module("app",["ngRoute"])
 				templateUrl: 'views/user-details.tpl.html',
 				controller: 'UserDetailsController'
 			})
+			.when('/home', {
+				templateUrl: 'views/home.tpl.html'
+			})
 			.otherwise({
-				redirectTo: '/'
+				redirectTo: '/home'
 			});
 	})
 	.config(function($httpProvider) {
