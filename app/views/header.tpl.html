@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" ng-controller="IndexController">
+<nav class="navbar navbar-default" ng-controller="HeaderController">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -8,7 +8,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <li ng-hide="loggedIn"><a href="#/login">Log in</a></li>
+        <li ng-show="loggedIn"><a href="#/login" ng-click="logout()">Log out</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

@@ -28,4 +28,8 @@ angular.module("app")
 		this.getCurrentUser = function() {
 			return currentUser;
 		}
+
+		this.setCurrentUser = function() {
+			currentUser = null;
+		}
 	}]);
