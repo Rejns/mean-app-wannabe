@@ -5,10 +5,9 @@ var mongoose = require('mongoose');
 
 var app = express();
 
+console.log(__dirname);
 app.use(bodyParser.json());
-app.use('/css', express.static(__dirname+'/app/css'))
-app.use('/js', express.static(__dirname+'/app/js'));
-app.use('/views', express.static(__dirname+'/app/views'));
+app.use(express.static(__dirname+'/app/public'));
 
 db = mongoose.connect("rejns:a1s2d3f4@ds045604.mongolab.com:45604/app-data");
 var Schema = mongoose.Schema;
