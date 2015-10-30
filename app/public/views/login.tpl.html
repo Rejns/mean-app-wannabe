@@ -1,7 +1,8 @@
-<form ng-submit="login()">
+<form ng-submit="login()" ng-hide="loading">
 	<input ng-model="username" />
 	<input ng-model="password" />
 	<button type="submit">log in</button>
 </form>
+<div id="loader" ng-show="loading"></div>
 <span>{{ errorMessage}}</span>
 

@@ -1,5 +1,8 @@
 <h2> User details: </h2>
-<div> Username: {{ username }} </div>
-<div> Role: {{ access }} </div>
-<div> {{ errorMessage }} </div>
+<div id="loader" ng-show="loading"></div>
+<div ng-hide="loading">
+	<div> Username: {{ username }} </div>
+	<div> Role: {{ access }} </div>
+	<div> {{ errorMessage }} </div>
+</div>
 
