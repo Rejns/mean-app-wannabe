@@ -9,7 +9,14 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="loggedIn"><a href="#/login">Log in</a></li>
-        <li ng-show="loggedIn"><a href="#/login" ng-click="logout()">Log out</a></li>
+        <li ng-show="loggedIn" class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user }}<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li ng-show="loggedIn"><a href="#/login" ng-click="logout()">Logout</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a ng-href="#/user-details/{{user}}">Profile</a></li>
+          </ul>
+        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

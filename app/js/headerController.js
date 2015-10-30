@@ -7,11 +7,12 @@ angular.module("app")
 		$scope.$watch('security.isAuthenticated()', function(val) {
 			$scope.loggedIn = val;
 		});
+		$scope.$watch('security.getCurrentUser()', function(user) {
+			$scope.user = user;
+		});
 
 		function logout() {
-			console.log("logout");
 			$window.localStorage.token = {};
 			security.setCurrentUser();
-			//$location.path('/login');
 		}
 	}]);
