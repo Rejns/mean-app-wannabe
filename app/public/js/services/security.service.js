@@ -1,15 +1,15 @@
 angular.module("app")
-	.service("security", ["$http", "$window","$q", function($http, $window, $q) {
+	.service("security", ["$http", "$localStorage","$q", function($http, $localStorage, $q) {
 
-		var currentUser = $window.localStorage.user || null;
+		var currentUser = $localStorage.user || null;
 		
 		this.login = function(username, password) {
 			var deferred = $q.defer();
 			$http.post("/api/authenticate", { username: username, password: password })
 				.then(function(response) {
 					if(response.data.token !== 'undefined') {
-						$window.localStorage.token = response.data.token;
-						$window.localStorage.user = response.data.user;
+						$localStorage.token = response.data.token;
+						$localStorage.user = response.data.user;
 						currentUser = response.data.user;
 						deferred.resolve(response);
 					}
@@ -20,10 +20,7 @@ angular.module("app")
 		}
 
 		this.isAuthenticated = function() {
-			if(currentUser !== null)
-				return true;
-			else
-				return false;
+			return !!currentUser;			
 		}
 
 		this.getCurrentUser = function() {

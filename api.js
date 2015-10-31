@@ -33,34 +33,45 @@ app.post('/api/authenticate', function(req, res) {
 });
 
 app.get('/api/users/:user', function(req, res) {
-	var token = req.headers.authorization.split(' ')[1];
-	jwt.verify(token, 'secret', function(err, decoded) {
-		if(decoded.user !== req.params.user)
-			res.sendStatus(401);
-		else if(!err) 
-			User.findOne({ 'username': req.params.user }, function (err, user) {
-				res.json(user);
-			});
-	});
+	if(req.headers.authorization !== undefined) {
+		var token = req.headers.authorization.split(' ')[1];
+		jwt.verify(token, 'secret', function(err, decoded) {
+			if(decoded === undefined)
+				res.sendStatus(400);
+			else if(decoded.user !== req.params.user)
+				res.sendStatus(401);
+			else if(!err) 
+				User.findOne({ 'username': req.params.user }, function (err, user) {
+					res.json(user);
+				});
+		});
+	}
+	else 
+		res.sendStatus(400);
+	
+
 });
 
 app.get('/api/users', function(req, res) {
-	var token = req.headers.authorization.split(' ')[1];
-	jwt.verify(token, 'secret', function(err, decoded) {
-		if(err) {
-			res.send(err.message);
-		}
-		else {
-			if(decoded.access === "admin") {
-				User.find(function(err, users) {
-					res.json(users);
-				});
+	if(req.headers.authorization !== undefined) {
+		var token = req.headers.authorization.split(' ')[1];
+		jwt.verify(token, 'secret', function(err, decoded) {
+			if(err) {
+				res.send(err.message);
 			}
-			else
-				res.sendStatus(401);
-		}
-	});
-	
+			else {
+				if(decoded.access === "admin") {
+					User.find(function(err, users) {
+						res.json(users);
+					});
+				}
+				else
+					res.sendStatus(401);
+			}
+		});
+	}
+	else 
+		res.sendStatus(400);
 });
 
 app.get('/', function(req, res) {

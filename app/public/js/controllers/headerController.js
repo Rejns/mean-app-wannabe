@@ -1,9 +1,10 @@
 angular.module("app")
-	.controller("HeaderController", ["$scope", "security","$window","$location","Users", function($scope, security, $window, $location, users) {
+	.controller("HeaderController", ["$scope", "security","$localStorage","$location","Users", function($scope, security, $localStorage, $location, users) {
 		$scope.appName = "My awesome app";
 		$scope.security = security;
 		$scope.logout = logout;
 		$scope.isAdmin = false;
+		$scope.user = $localStorage.user;
 
 		$scope.$watch('security.isAuthenticated()', function(val) {
 			$scope.loggedIn = val;
@@ -14,13 +15,14 @@ angular.module("app")
 							$scope.isAdmin = true;
 				});
 		});
-		$scope.$watch('security.getCurrentUser()', function(user) {
+		$scope.$watch('user', function(user) {
 			$scope.user = user;
 		});
 
 		function logout() {
 			$scope.isAdmin = false;
-			$window.localStorage.token = {};
+			$localStorage.token = null;
+			$localStorage.user = null;
 			security.setCurrentUser();
 		}
 	}]);

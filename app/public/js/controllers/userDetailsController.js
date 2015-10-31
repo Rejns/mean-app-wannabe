@@ -1,5 +1,6 @@
 angular.module("app")
-	.controller("UserDetailsController", ["Users", "$window","security","$location","$scope", function(users, $window, security, $location, $scope) {
+	.controller("UserDetailsController", ["Users","security","$location","$scope","$localStorage", function(users, security, $location, $scope, $localStorage) {
+
 		if(!security.isAuthenticated())
 			$location.path('/login');
 		else {
@@ -15,6 +16,9 @@ angular.module("app")
 				$scope.loading = false;
 				if(error.status === 401)
 					$scope.errorMessage = "Unauthorized access!";
+				if(error.status === 400) {
+					$location.path('/login');
+				}
 			});
 		}
 	}]);

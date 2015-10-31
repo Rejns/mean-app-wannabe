@@ -1,9 +1,9 @@
 angular.module("app")
-	.factory("interceptor", ["$window", function($window){
+	.factory("interceptor", ["$localStorage", function($localStorage){
 		return {
 			request: function(config) {
-				if($window.localStorage.token)
-					config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
+				if($localStorage.token)
+					config.headers.Authorization = 'Bearer ' + $localStorage.token;
 				return config;
 			}
 		}

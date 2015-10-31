@@ -1,9 +1,8 @@
 angular.module("app")
-	.controller("LoginController", ["$scope", "security", "Users", "$location", function($scope, security, users, $location) {
-
-		if(security.isAuthenticated())
+	.controller("LoginController", ["$scope", "security", "Users", "$location","$localStorage", function($scope, security, users, $location, $localStorage) {
+		if(security.isAuthenticated() && $localStorage.token !== null)
 			$location.path('/home');
-		
+
 		$scope.username ="username";
 		$scope.password ="password";
 		$scope.login = login;
@@ -29,5 +28,4 @@ angular.module("app")
 				}
 			});
 		}
-
 	}]);

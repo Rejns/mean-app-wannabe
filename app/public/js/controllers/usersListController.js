@@ -15,5 +15,7 @@ angular.module("app")
 				$scope.loading = false;
 				if(error.status === 401)
 					$scope.errorMessage = "Unauthorized access";
+				if(error.status === 400)
+					$location.path('/login');
 			});
 	}]);
