@@ -1,7 +1,11 @@
 angular.module("app")
 	.controller("LoginController", ["$scope", "security", "Users", "$location","$localStorage", function($scope, security, users, $location, $localStorage) {
-		if(security.isAuthenticated() && $localStorage.token !== null)
+		
+		//take care of refresh and multiple windows
+		if(security.isAuthenticated() && $localStorage.token !== null) 
 			$location.path('/home');
+		if($localStorage.user === null)
+			security.setCurrentUser();
 
 		$scope.username ="username";
 		$scope.password ="password";

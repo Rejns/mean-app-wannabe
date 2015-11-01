@@ -10,7 +10,8 @@ angular.module("app",["ngRoute","ngStorage"])
 				controller: 'UserDetailsController'
 			})
 			.when('/home', {
-				templateUrl: 'views/home.tpl.html'
+				templateUrl: 'views/home.tpl.html',
+				controller: 'HomeController'
 			})
 			.when('/users-list', {
 				templateUrl: 'views/users-list.tpl.html',

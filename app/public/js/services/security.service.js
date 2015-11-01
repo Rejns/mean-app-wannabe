@@ -1,5 +1,5 @@
 angular.module("app")
-	.service("security", ["$http", "$localStorage","$q", function($http, $localStorage, $q) {
+	.service("security", ["$http", "$localStorage","$q","$rootScope", function($http, $localStorage, $q, $rootScope) {
 
 		var currentUser = $localStorage.user || null;
 		

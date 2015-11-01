@@ -4,7 +4,6 @@ angular.module("app")
 		$scope.security = security;
 		$scope.logout = logout;
 		$scope.isAdmin = false;
-		$scope.user = $localStorage.user;
 
 		$scope.$watch('security.isAuthenticated()', function(val) {
 			$scope.loggedIn = val;
@@ -15,7 +14,9 @@ angular.module("app")
 							$scope.isAdmin = true;
 				});
 		});
-		$scope.$watch('user', function(user) {
+		$scope.$watch(function() { 
+			return security.getCurrentUser();
+		}, function(user) {
 			$scope.user = user;
 		});
 
@@ -23,6 +24,5 @@ angular.module("app")
 			$scope.isAdmin = false;
 			$localStorage.token = null;
 			$localStorage.user = null;
-			security.setCurrentUser();
 		}
 	}]);
