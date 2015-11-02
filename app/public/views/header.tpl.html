@@ -18,9 +18,16 @@
           </ul>
         </li>
       </ul>
-      <ul ng-show="isAdmin && loggedIn" class="nav navbar-nav navbar-left">
-        <li><a href="#/users-list">Manage Users</a></li>
-      </ul>
+    <ul class="nav navbar-nav navbar-left">
+      <li ng-show="loggedIn" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage users
+        <span class="caret"></span></a>
+        <ul ng-show="isAdmin && loggedIn" class="dropdown-menu">
+          <li><a href="#/users-list">List of users</a></li>
+          <li><a href="#/create-user">Create new user</a></li>
+        </ul>
+      </li>
+    <ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

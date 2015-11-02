@@ -1,8 +1,11 @@
-<form ng-submit="login()" ng-hide="loading">
-	<input ng-model="username" />
-	<input ng-model="password" />
-	<button type="submit">log in</button>
-</form>
-<div id="loader" ng-show="loading"></div>
-<span>{{ errorMessage}}</span>
+<div class="container">
+	<h2> Please enter credentials </h2>
+	<form ng-submit="login()" ng-hide="loading">
+		<input ng-model="username" />
+		<input ng-model="password" />
+		<button type="submit">log in</button>
+	</form>
+	<div id="loader" ng-show="loading"></div>
+	<span>{{ errorMessage}}</span>
+</div>
 
