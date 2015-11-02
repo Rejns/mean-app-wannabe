@@ -1,11 +1,19 @@
 angular.module("app")
 	.controller("LoginController", ["$scope", "security", "Users", "$location","$localStorage", function($scope, security, users, $location, $localStorage) {
 		
-		//take care of refresh and multiple windows
+
+		$scope.$watch(function() {
+			return security.isAuthenticated() && $localStorage.token !== null && $location.path() === '/login';
+		}, function(newv, oldv) {
+			if(newv === true)
+				$location.path('/user-details/'+security.getCurrentUser());
+		});
+
+		//take care of refresh 
 		if(security.isAuthenticated() && $localStorage.token !== null) 
-			$location.path('/home');
-		if($localStorage.user === null)
-			security.setCurrentUser();
+			$location.path('/user-details/'+security.getCurrentUser());
+		//if($localStorage.user === null)
+		//	security.setCurrentUser();
 
 		$scope.username ="username";
 		$scope.password ="password";
@@ -16,11 +24,8 @@ angular.module("app")
 			$scope.loading = true;
 			security.login($scope.username, $scope.password)
 			.then(function(){
-				if(security.getCurrentUser() !== null) {
+				if(security.getCurrentUser() !== null) 
 					$scope.loading = false;
-					var user = security.getCurrentUser();
-					$location.path('/user-details/'+user);
-				}
 			}, function(error) {
 				if(error.status === 400) {
 					$scope.loading = false;

@@ -1,5 +1,6 @@
 angular.module("app")
 	.controller("HeaderController", ["$scope", "security","$localStorage","$location","Users", function($scope, security, $localStorage, $location, users) {
+		
 		$scope.appName = "My awesome app";
 		$scope.security = security;
 		$scope.logout = logout;
@@ -14,6 +15,7 @@ angular.module("app")
 							$scope.isAdmin = true;
 				});
 		});
+
 		$scope.$watch(function() { 
 			return security.getCurrentUser();
 		}, function(user) {
@@ -25,4 +27,5 @@ angular.module("app")
 			$localStorage.token = null;
 			$localStorage.user = null;
 		}
+
 	}]);
