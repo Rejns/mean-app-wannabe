@@ -7,13 +7,12 @@
 			<tr>
 				<th> Username </th>
 				<th> Access </th>
+				<th> Action </th>
 			</tr>
 		</thead>
-			<tbody>	
-			<tr ng-repeat="user in users">
-				<td> {{ user.username }} </td>
-				<td> {{ user.access }} </td>
-			</tr>	
+		<tbody>
+			<tr ng-repeat="user in users" user-row user="user">
+			</tr>
 		</tbody>
 	</table>
 </div>

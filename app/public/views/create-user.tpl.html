@@ -1,9 +1,10 @@
 <div class="container">
 	<h2> Create new user </h2>
-	<form ng-submit="">
+	<form ng-submit="add()" ng-hide="loading">
 		<input ng-model="username">
 		<input ng-model="password">
 		<input ng-model="access">
 		<button type="submit">add</button>
 	</form>
+	<div id="loader" ng-show="loading"></div>
 </div>
