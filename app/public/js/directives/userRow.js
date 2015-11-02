@@ -1,17 +1,19 @@
 angular.module("app")
 	.directive("userRow", ["Users", function(users) {
 		return {
-			scope: {
-          		user: '='
-        	},
+			scope: true,
 			restrict: 'A',
 			replace: true,
 			template: '<tr><td> {{ user.username }} </td><td> {{ user.access }} </td><td><button>delete</button></td></tr>',
 			link : function(scope, element, attrs) {
+				var currentUser = scope.user.username;
 				element.find('button')[0].onclick = function() {
+					element.html("<tr><td><span>delete in progress ...<span><div id='loader'></div></td></tr>");
 					users.delete(scope.user.username).then(function(response) {
-						element.html('');
+						console.log(response);
+						element.html('<td>'+currentUser+' successfully deleted</td><td></td><td></td>');
 					}, function(error) {
+
 					});
 					
 					
@@ -19,15 +21,3 @@ angular.module("app")
 			}
 		}
 	}]);
-
-angular.module("app").directive("testOk", function(){
-
-    return {
-        restrict: 'E',
-        template: "<span><strong>{{position.Name}}</strong> ({{position.Code}})</span>",
-        replace: true,
-        scope: {
-          position: '='
-        }
-    }
-});

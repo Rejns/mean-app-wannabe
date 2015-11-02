@@ -80,17 +80,16 @@ app.post('/api/create', function(req, res) {
 });
 
 app.delete('/api/delete/:user', function(req, res) {
-	console.log(req.body);
 	if(req.headers.authorization !== undefined) {
 		var token = req.headers.authorization.split(' ')[1];
 		jwt.verify(token, 'secret', function(err, decoded) {
 			if(decoded.access === "admin" && decoded.username !== req.params.user) { //admin cannot delete himself
 				User.remove({ username: req.params.user }, function(error, deleted) {
 					if(!err) {
-						console.log(deleted);
-						//res.json(deleted);
+						res.json(deleted);
 					}
-					res.json(error);
+					else
+						res.json(error);
 				});
 			}
 			else
