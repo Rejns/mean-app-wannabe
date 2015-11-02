@@ -6,14 +6,11 @@ angular.module("app")
 			return security.isAuthenticated() && $localStorage.token !== null && $location.path() === '/login';
 		}, function(newv, oldv) {
 			if(newv === true)
-				$location.path('/user-details/'+security.getCurrentUser());
+				$location.path('/home');
 		});
 
-		//take care of refresh 
 		if(security.isAuthenticated() && $localStorage.token !== null) 
-			$location.path('/user-details/'+security.getCurrentUser());
-		//if($localStorage.user === null)
-		//	security.setCurrentUser();
+			$location.path('/home');
 
 		$scope.username ="username";
 		$scope.password ="password";
