@@ -2,7 +2,8 @@ angular.module("app")
 	.controller("UsersListController", ["$scope", "Users", "security","$location","$localStorage", function($scope, users, security, $location, $localStorage){
 		
 		$scope.authError = true;
-		$scope.loading = true;
+		$scope.loading = false;
+		$scope.isAdmin = false;
 		var initialWatch = true;
 
 		$scope.$watch(function() {	
@@ -13,16 +14,23 @@ angular.module("app")
 			initialWatch = false;
 		});
 
-		$scope.loading = true;
-		users.getAll().then(function(response){
-			$scope.authError = false;
-			$scope.users = response.data;
-			$scope.loading = false;
-		}, function(error) {
-			$scope.loading = false;
-			if(error.status === 401)
-				$scope.errorMessage = "Unauthorized access";
-			if(error.status === 400)
-				$location.path('/login');
-		});
+		$scope.loading1 = true;
+		var user = security.getCurrentUser();
+		users.getOne(user)
+			.then(function(response) {
+				if(response.data.access === "admin") {
+						$scope.isAdmin = true;
+						$scope.loading1 = false;
+						$scope.loading = true;
+						users.getAll().then(function(response){
+							$scope.authError = false;
+							$scope.users = response.data;
+							$scope.loading = false;
+						});
+				}
+				else {
+					$scope.errorMessage = "unauthorized access";
+					$scope.loading1 = false;
+				}
+			});
 	}]);

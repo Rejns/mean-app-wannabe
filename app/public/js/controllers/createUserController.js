@@ -1,10 +1,11 @@
 angular.module("app")
-	.controller("CreateUserController", ["$scope","$localStorage","$location","Users", function($scope, $localStorage, $location, users) {
+	.controller("CreateUserController", ["$scope","$localStorage","$location","Users","security", function($scope, $localStorage, $location, users, security) {
 		
 		$scope.username = "new username";
 		$scope.password = "new password";
 		$scope.access = "access";
 		$scope.add = add;
+		$scope.isAdmin = false;
 
 		var initialWatch = true;
 
@@ -17,15 +18,32 @@ angular.module("app")
 		});
 
 		$scope.loading = false;
+		$scope.loading1 = true;
+		var user = security.getCurrentUser();
+		users.getOne(user)
+			.then(function(response) {
+				if(response.data.access === "admin") {
+						$scope.isAdmin = true;
+						$scope.loading1 = false;
+				}
+				else {
+					$scope.errorMessage = "unauthorized access";
+					$scope.loading1 = false;
+				}
+			});
 
 		function add() {
+			$scope.successMessage = "";
 			$scope.loading = true;
 			users.create($scope.username, $scope.password, $scope.access)
 				.then(function(response) {
 					$scope.loading = false;
-					console.log(response);
+					$scope.successMessage = response.data.username+" added to database";
 				}, function(error) {
-					console.log(error);
+					$scope.loading = false;
+					if(error.status === 401) {
+						$scope.errorMessage = "unauthorized access";
+					}
 				});	
 		}
 		

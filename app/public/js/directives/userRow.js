@@ -8,10 +8,9 @@ angular.module("app")
 			link : function(scope, element, attrs) {
 				var currentUser = scope.user.username;
 				element.find('button')[0].onclick = function() {
-					element.html("<tr><td><span>delete in progress ...<span><div id='loader'></div></td></tr>");
+					element.html("<td><span>delete in progress ...<span><div id='loader'></div></td><td></td><td></td>");
 					users.delete(scope.user.username).then(function(response) {
-						console.log(response);
-						element.html('<td>'+currentUser+' successfully deleted</td><td></td><td></td>');
+						element.html('<td><b>'+currentUser+' </b>successfully deleted</td><td></td><td></td>');
 					}, function(error) {
 
 					});

@@ -1,8 +1,12 @@
 <div class="container">
+<div> {{ errorMessage }} </div>
+<div ng-show="loading1"> checking permissions ... </div>
+<div id="loader" ng-show="loading1"></div>
+</div> 
+<div class="container" ng-show="isAdmin">
 	<h2> List of registered users </h2>
-	<div id="loader" ng-show="loading"></div>
-	<div> {{ errorMessage }} </div>
-	<div id="success"></div>
+	<div id="loader" ng-show="loading"></div>	
+	<div ng-show="loading">loading list ...</div>
 	<table ng-hide="authError" class="table">
 		<thead>
 			<tr>

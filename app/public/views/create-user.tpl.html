@@ -1,4 +1,9 @@
 <div class="container">
+	<div> {{ errorMessage }} </div>
+	<div id="loader" ng-show="loading1"></div>
+	<div ng-show="loading1">checking permissions ... </div>
+</div>
+<div class="container" ng-show="isAdmin">
 	<h2> Create new user </h2>
 	<form ng-submit="add()" ng-hide="loading">
 		<input ng-model="username">
@@ -7,4 +12,6 @@
 		<button type="submit">add</button>
 	</form>
 	<div id="loader" ng-show="loading"></div>
+	<span ng-show="loading"> creating new user ... </span>
+	<span ng-hide="loading"> {{ successMessage }} </span>
 </div>
