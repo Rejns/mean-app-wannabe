@@ -188,6 +188,7 @@ app.post('/api/posts/create', function(req, res) {
 		res.sendStatus(400);
 });
 
+
 app.get('/', function(req, res) {
 	res.sendFile(__dirname+'/app/index.html');
 });
