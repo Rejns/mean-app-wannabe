@@ -8,10 +8,19 @@ var Schema = mongoose.Schema;
 var User = new Schema({
   username    : String,
   password	  : String,
-  access	  : String
+  access	  : String,
 }, {collection: 'users'});
 mongoose.model('User', User);
 var User = mongoose.model('User');
+
+var Post = new Schema({
+	author: String,
+	message: String,
+	created: Date
+
+}, {collection: 'posts'});
+mongoose.model('Post',Post);
+var Post = mongoose.model('Post');
 
 var app = express();
 
@@ -132,6 +141,37 @@ app.get('/api/users', function(req, res) {
 	else 
 		res.sendStatus(400);
 });
+
+app.get('/api/posts', function(req, res) {
+	Post.find(function(err, posts) {
+		res.json(posts);
+	})
+});
+
+app.post('/api/posts/create', function(req, res) {
+	if(req.headers.authorization !== undefined) {
+		var token = req.headers.authorization.split(' ')[1];
+		jwt.verify(token, 'secret', function(err, decoded) {
+			if(decoded.username === req.body.username) {
+				var post = new Post({
+					author: req.body.author,
+					message: req.body.message,
+					created: new Date()
+				});
+
+				Post.create(post, function(err, post) {
+					if(!err) {
+						res.json(post);
+					}
+				});
+			}
+			else
+				res.sendStatus(401);
+		});
+	}
+	else
+		res.sendStatus(400);
+})
 
 app.get('/', function(req, res) {
 	res.sendFile(__dirname+'/app/index.html');

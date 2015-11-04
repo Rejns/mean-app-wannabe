@@ -1,10 +1,16 @@
 <div class="container">
 	<h2> Please enter credentials </h2>
-	<form ng-submit="login()" ng-hide="loading">
-		<input ng-model="username" />
-		<input ng-model="password" />
-		<button type="submit">log in</button>
-	</form>
+	<div class="col-lg-6">
+		<form ng-submit="login()" ng-hide="loading">
+			<div class="form-group">
+				<input ng-model="username" class="form-control" />
+			</div>
+			<div class="form-group">
+				<input ng-model="password" class="form-control" />
+			</div>
+			<button type="submit" class="btn btn-default">log in</button>
+		</form>
+	</div>
 	<div id="loader" ng-show="loading"></div>
 	<div ng-show="loading">authentication in progress ... </div>
 	<span>{{ errorMessage}}</span>
