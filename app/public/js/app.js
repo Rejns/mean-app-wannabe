@@ -21,6 +21,10 @@ angular.module("app",["ngRoute","ngStorage"])
 				templateUrl: 'views/create-user.tpl.html',
 				controller: 'CreateUserController'
 			})
+			.when('/register', {
+				templateUrl: 'views/register.tpl.html',
+				controller: 'RegisterController' 
+			})
 			.otherwise({
 				redirectTo: '/home'
 			});

@@ -12,6 +12,9 @@ angular.module("app")
 			},
 			delete: function(username) { 
 				return $http.delete('/api/delete/'+username); //is data is sent in body it does not work
+			},
+			register: function(username, password) {
+				return $http.post('/api/register', { username: username, password: password});
 			}
 		}
 	});

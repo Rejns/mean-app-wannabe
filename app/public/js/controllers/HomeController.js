@@ -28,9 +28,9 @@ angular.module("app")
 				var posts = response.data;
 				for(var i = 0; i < posts.length; i++) {
 					var date = new Date(posts[i].created);
-					date = { hours: date.getHours(), 
-						 minutes: date.getMinutes(),
-					     date: addZero(date.getDate())+'-'+ addZero((date.getMonth()+1))+'-'+addZero(date.getFullYear())
+					date = { hours: addZero(date.getHours()), 
+						 minutes: addZero(date.getMinutes()),
+					     date: addZero(date.getDate())+'/'+ addZero((date.getMonth()+1))+'/'+addZero(date.getFullYear())
 						};
 					posts[i].created = date;
 				}
@@ -44,9 +44,9 @@ angular.module("app")
 			posts.create(security.getCurrentUser(),$scope.comment)
 			.then(function(response) {
 				var date = new Date(response.data.created);
-				date = { hours: date.getHours(), 
-						 minutes: date.getMinutes(),
-					     date: addZero(date.getDate())+'-'+ addZero((date.getMonth()+1))+'-'+addZero(date.getFullYear())
+				date = { hours: addZero(date.getHours()), 
+						 minutes: addZero(date.getMinutes()),
+					     date: addZero(date.getDate())+'/'+ addZero((date.getMonth()+1))+'/'+addZero(date.getFullYear())
 						};
 				var post = response.data;
 				post.created = date;
@@ -57,9 +57,8 @@ angular.module("app")
 		} 
 
 		function addZero(i) {
-		    if (i < 10) {
+		    if (i < 10) 
 		        i = "0" + i;
-		    }
 		    return i;
 		}
 	}]);

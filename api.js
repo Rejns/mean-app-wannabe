@@ -43,6 +43,21 @@ app.post('/api/authenticate', function(req, res) {
 	});
 });
 
+app.post('/api/register', function(req, res) {
+	var user = new User({
+			username: req.body.username,
+			password: req.body.password,
+			access: "user"
+		});
+
+	User.create(user, function(err, user) {
+		if(user)
+			res.json(user);
+		else
+			res.json(error);
+	});
+});
+
 app.get('/api/users/:user', function(req, res) {
 	if(req.headers.authorization !== undefined) {
 		var token = req.headers.authorization.split(' ')[1];
@@ -171,7 +186,7 @@ app.post('/api/posts/create', function(req, res) {
 	}
 	else
 		res.sendStatus(400);
-})
+});
 
 app.get('/', function(req, res) {
 	res.sendFile(__dirname+'/app/index.html');
