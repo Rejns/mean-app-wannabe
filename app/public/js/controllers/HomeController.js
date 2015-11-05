@@ -20,11 +20,13 @@ angular.module("app")
 			return security.isAuthenticated();
 		}, function(val, old) {
 			$scope.isAuth = val;
-		})
+		});
 
+		$scope.loading = true;
 		posts.getAll()
 			.then(
 			function(response) {
+				$scope.loading = false;
 				var posts = response.data;
 				for(var i = 0; i < posts.length; i++) {
 					var date = new Date(posts[i].created);
@@ -41,8 +43,10 @@ angular.module("app")
 			});
 
 		function post() {
+			$scope.creatingPost = true;
 			posts.create(security.getCurrentUser(),$scope.comment)
 			.then(function(response) {
+				$scope.creatingPost = false;
 				var date = new Date(response.data.created);
 				date = { hours: addZero(date.getHours()), 
 						 minutes: addZero(date.getMinutes()),
@@ -54,7 +58,7 @@ angular.module("app")
 			}, function(error) {
 				
 			});
-		} 
+		}
 
 		function addZero(i) {
 		    if (i < 10) 

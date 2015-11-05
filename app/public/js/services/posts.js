@@ -6,6 +6,9 @@ angular.module("app")
 			},
 			create: function(username, message) {
 				return $http.post('/api/posts/create', { author: username, message: message });
+			},
+			delete: function(id) {
+				return $http.delete('/api/posts/delete/'+id);
 			}	
 		}
 	});

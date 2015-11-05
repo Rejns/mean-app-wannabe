@@ -14,8 +14,6 @@ angular.module("app")
 					}, function(error) {
 
 					});
-					
-					
 				}
 			}
 		}
