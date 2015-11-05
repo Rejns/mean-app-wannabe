@@ -8,12 +8,9 @@ angular.module("app")
 
 		$scope.$watch('security.isAuthenticated()', function(val) {
 			$scope.loggedIn = val;
-			var user = security.getCurrentUser();
-			if(user !== null)
-				users.getOne(user).then(function(response) {
-					if(response.data.access === "admin") 
-							$scope.isAdmin = true;
-				});
+			if(security.getCurrentUser() !== null && security.isAdmin())
+				$scope.isAdmin = true;
+				
 		});
 
 		$scope.$watch(function() { 
@@ -26,6 +23,7 @@ angular.module("app")
 			$scope.isAdmin = false;
 			$localStorage.token = null;
 			$localStorage.user = null;
+			$localStorage.access = null;
 		}
 
 	}]);

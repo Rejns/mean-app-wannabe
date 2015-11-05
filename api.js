@@ -36,7 +36,7 @@ app.post('/api/authenticate', function(req, res) {
   			res.sendStatus(400);
   		else if(user.password === req.body.password) {
   			var token = jwt.sign({ access: user.access, user: user.username }, 'secret');
-  			res.json({ token: token, user: user.username });
+  			res.json({ token: token, user: user.username, access: user.access });
   		}
   		else
   			res.sendStatus(401);
@@ -178,6 +178,27 @@ app.post('/api/posts/create', function(req, res) {
 					if(!err) {
 						res.json(post);
 					}
+				});
+			}
+			else
+				res.sendStatus(401);
+		});
+	}
+	else
+		res.sendStatus(400);
+});
+
+app.delete('/api/posts/delete/:id', function(req, res) {
+	if(req.headers.authorization !== undefined) {
+		var token = req.headers.authorization.split(' ')[1];
+		jwt.verify(token, 'secret', function(err, decoded) {
+			if(decoded.access === "admin") {
+				Post.remove({_id:req.params.id}, function(error, deleted) {
+					if(!err) {
+						res.json(deleted);
+					}
+					else
+						res.json(err);
 				});
 			}
 			else

@@ -14,23 +14,18 @@ angular.module("app")
 			initialWatch = false;
 		});
 
-		$scope.loading1 = true;
-		var user = security.getCurrentUser();
-		users.getOne(user)
-			.then(function(response) {
-				if(response.data.access === "admin") {
-						$scope.isAdmin = true;
-						$scope.loading1 = false;
-						$scope.loading = true;
-						users.getAll().then(function(response){
-							$scope.authError = false;
-							$scope.users = response.data;
-							$scope.loading = false;
-						});
-				}
-				else {
-					$scope.errorMessage = "unauthorized access";
-					$scope.loading1 = false;
-				}
-			});
+		console.log($localStorage.access);
+		console.log(security.isAdmin());
+
+		if(security.isAdmin()) {
+				$scope.isAdmin = true;
+				$scope.loading = true;
+				users.getAll().then(function(response){
+					$scope.authError = false;
+					$scope.users = response.data;
+					$scope.loading = false;
+				});
+		}
+		else 
+			$scope.errorMessage = "unauthorized access";
 	}]);

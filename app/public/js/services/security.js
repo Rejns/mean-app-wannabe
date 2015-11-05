@@ -21,6 +21,8 @@ angular.module("app")
 					if(response.data.token !== 'undefined') {
 						$localStorage.token = response.data.token;
 						$localStorage.user = response.data.user;
+						if(response.data.access === "admin")
+							$localStorage.access = response.data.access;
 					    currentUser = response.data.user;
 						deferred.resolve(response);
 					}
@@ -28,6 +30,10 @@ angular.module("app")
 					deferred.reject(error);
 				});
 			return deferred.promise; 
+		}
+
+		this.isAdmin = function() {
+			return !!$localStorage.access;
 		}
 
 		this.isAuthenticated = function() {

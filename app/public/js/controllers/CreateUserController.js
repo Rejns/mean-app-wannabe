@@ -18,19 +18,11 @@ angular.module("app")
 		});
 
 		$scope.loading = false;
-		$scope.loading1 = true;
-		var user = security.getCurrentUser();
-		users.getOne(user)
-			.then(function(response) {
-				if(response.data.access === "admin") {
-						$scope.isAdmin = true;
-						$scope.loading1 = false;
-				}
-				else {
-					$scope.errorMessage = "unauthorized access";
-					$scope.loading1 = false;
-				}
-			});
+
+		if(security.isAdmin())
+			$scope.isAdmin = true;
+		else
+			$scope.errorMessage = "unauthorized access";
 
 		function add() {
 			$scope.successMessage = "";

@@ -20,13 +20,14 @@ angular.module("app")
 			return security.isAuthenticated();
 		}, function(val, old) {
 			$scope.isAuth = val;
-		})
+		});
 
 		posts.getAll()
 			.then(
 			function(response) {
 				var posts = response.data;
 				for(var i = 0; i < posts.length; i++) {
+					console.log(posts[i]);
 					var date = new Date(posts[i].created);
 					date = { hours: addZero(date.getHours()), 
 						 minutes: addZero(date.getMinutes()),
@@ -54,7 +55,7 @@ angular.module("app")
 			}, function(error) {
 				
 			});
-		} 
+		}
 
 		function addZero(i) {
 		    if (i < 10) 
