@@ -41,7 +41,7 @@ angular.module('app')
                  if(scope.pageCount < scope.numPages)
                   scope.numPages = scope.pageCount;
               }, function(error) {
-                  alert(error.status);
+                  console.log(error);
               });      
           
               scope.noNext = function() {

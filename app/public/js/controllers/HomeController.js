@@ -29,7 +29,6 @@ angular.module("app")
 				$scope.loading = false;
 				var posts = response.data;
 				for(var i = 0; i < posts.length; i++) {
-					console.log(posts[i]);
 					var date = new Date(posts[i].created);
 					date = { hours: addZero(date.getHours()), 
 						 minutes: addZero(date.getMinutes()),
