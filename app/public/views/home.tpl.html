@@ -28,3 +28,10 @@
 <div id="loader" ng-show="loading"></div>
 <div ng-show="loading">loading posts ... </div>
 </div>
+<div class="container">
+  <div infinite-scroll='loadMore()' infinite-scroll-distance='0' >
+    <div ng-repeat='image in images'>
+     <img ng-src='http://placehold.it/225x250&text={{image}}'>
+    </div>
+  </div>
+</div>

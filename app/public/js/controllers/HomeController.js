@@ -1,5 +1,5 @@
 angular.module("app")
-	.controller("HomeController", ["security", "$localStorage", "$scope","Posts", function(security, $localStorage, $scope, posts) {
+	.controller("HomeController", ["security", "$localStorage", "$scope","Posts","$q", function(security, $localStorage, $scope, posts, $q) {
 		
 		$scope.comment = "write your comment here";
 		$scope.post = post;
@@ -65,4 +65,26 @@ angular.module("app")
 		        i = "0" + i;
 		    return i;
 		}
+
+		$scope.images = [1, 2, 3];
+		$scope.scroll1 = false;
+
+		$scope.loadMore = function() {
+		 var deferred = $q.defer();	
+			if($scope.scroll1 === true) {
+			setTimeout(function() {
+			  var last = $scope.images[$scope.images.length - 1];
+			  $scope.images.push(last + 1);
+			  $scope.$apply();
+			  deferred.resolve();
+			},1000);
+			}	
+			else {
+			$scope.scroll1 = true;
+			deferred.resolve();
+		}
+
+		return deferred.promise;
+
+		};
 	}]);
