@@ -1,4 +1,4 @@
-angular.module("app",["ngRoute","ngStorage"])
+angular.module("app",["ngRoute","ngStorage","ngResource"])
 	.config(function($routeProvider){
 		$routeProvider
 			.when('/login', {
