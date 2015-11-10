@@ -1,10 +1,12 @@
 angular.module("app")
-	.controller("UsersListController", ["$scope", "Users", "security","$location","$localStorage", function($scope, users, security, $location, $localStorage){
+	.controller("UsersListController", ["$scope", "Users", "security","$location","$localStorage","User", function($scope, users, security, $location, $localStorage, User){
 		
-		$scope.authError = true;
-		$scope.loading = false;
 		$scope.isAdmin = false;
 		var initialWatch = true;
+		$scope.list = [];
+		$scope.user = User;
+		$scope.results = { options: [ {value: 5}, { value: 10}, {value: 20}, {value:50}], selected: {value: 10}};
+		$scope.numPages = 5;
 
 		$scope.$watch(function() {	
 			return !!$localStorage.token;
@@ -14,18 +16,8 @@ angular.module("app")
 			initialWatch = false;
 		});
 
-		console.log($localStorage.access);
-		console.log(security.isAdmin());
-
-		if(security.isAdmin()) {
-				$scope.isAdmin = true;
-				$scope.loading = true;
-				users.getAll().then(function(response){
-					$scope.authError = false;
-					$scope.users = response.data;
-					$scope.loading = false;
-				});
-		}
+		if(security.isAdmin()) 
+			$scope.isAdmin = true;
 		else 
 			$scope.errorMessage = "unauthorized access";
 	}]);

@@ -2,7 +2,8 @@ angular.module("app")
 	.factory("Users", function($http) {
 		return {
 			getAll: function() {
-				return $http.get('/api/users');
+				var config = { method: 'GET', url: '/api/users', params : { page: 2, limit: 10 }};
+				return $http(config);
 			},
 			getOne: function(username) {
 				return $http.get('/api/users/'+username);
@@ -17,4 +18,7 @@ angular.module("app")
 				return $http.post('/api/register', { username: username, password: password});
 			}
 		}
-	});
+	})
+	.factory("User", ["$resource", function($resource) {
+    return $resource("/api/users", {}, { 'query': {method : 'GET', isArray: false}});
+  }]);

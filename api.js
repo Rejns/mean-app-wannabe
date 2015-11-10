@@ -1,7 +1,11 @@
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+var mongoose = require('mongoose-paginate');
+var paginate = require('express-paginate');
+var app = express();
+ 
+
 
 db = mongoose.connect("rejns:a1s2d3f4@ds045604.mongolab.com:45604/app-data");
 var Schema = mongoose.Schema;
@@ -13,6 +17,7 @@ var User = new Schema({
 mongoose.model('User', User);
 var User = mongoose.model('User');
 
+
 var Post = new Schema({
 	author: String,
 	message: String,
@@ -22,13 +27,17 @@ var Post = new Schema({
 mongoose.model('Post',Post);
 var Post = mongoose.model('Post');
 
-var app = express();
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname+'/app/public'));
+app.use(paginate.middleware(10, 50));
 
 app.post('/api/authenticate', function(req, res) {	
 	User.findOne({ 'username': req.body.username }, function (err, user) {
@@ -125,36 +134,38 @@ app.delete('/api/delete/:user', function(req, res) {
 		res.sendStatus(400);
 });
 
-function findWithAttr(array, attr, value) {
+/*function findWithAttr(array, attr, value) {
     for(var i = 0; i < array.length; i += 1) {
         if(array[i][attr] === value) {
             return i;
         }
     }
-}
+}*/
 
 app.get('/api/users', function(req, res) {
-	if(req.headers.authorization !== undefined) {
+	/*if(req.headers.authorization !== undefined) {
 		var token = req.headers.authorization.split(' ')[1];
 		jwt.verify(token, 'secret', function(err, decoded) {
 			if(err) {
 				res.send(err.message);
 			}
 			else {
-				if(decoded.access === "admin") {
-					User.find(function(err, users) {
-						var indexOfCurrent = findWithAttr(users, 'username', decoded.username);
-						users.splice(indexOfCurrent,1);
-						res.json(users);
+				if(decoded.access === "admin") {*/
+					console.log(req.query);
+					User.paginate({}, req.query.page, req.query.limit, function(err, pageCount, users, itemCount) {
+						res.json({ users: users, pageCount: pageCount });
+						//var indexOfCurrent = findWithAttr(users, 'username', decoded.username);
+						//users.splice(indexOfCurrent,1);
+						
 					});
-				}
+/*				}
 				else
 					res.sendStatus(401);
 			}
 		});
 	}
 	else 
-		res.sendStatus(400);
+		res.sendStatus(400);*/
 });
 
 app.get('/api/posts', function(req, res) {
