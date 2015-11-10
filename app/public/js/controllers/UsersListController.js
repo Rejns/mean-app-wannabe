@@ -8,6 +8,7 @@ angular.module("app")
 		$scope.results = { options: [ {value: 5}, { value: 10}, {value: 20}, {value:50}], selected: {value: 10}};
 		$scope.numPages = 5;
 
+
 		$scope.$watch(function() {	
 			return !!$localStorage.token;
 		}, function(hasToken, oldv) {

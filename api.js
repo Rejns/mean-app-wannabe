@@ -151,7 +151,6 @@ app.get('/api/users', function(req, res) {
 			}
 			else {
 				if(decoded.access === "admin") {*/
-					console.log(req.query);
 					User.paginate({}, req.query.page, req.query.limit, function(err, pageCount, users, itemCount) {
 						res.json({ users: users, pageCount: pageCount });
 						//var indexOfCurrent = findWithAttr(users, 'username', decoded.username);

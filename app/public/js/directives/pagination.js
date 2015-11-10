@@ -32,9 +32,7 @@ angular.module('app')
               var resourceGetter = $parse(attrs.resource);
               var resource = resourceGetter(scope.$parent);
               scope.forward = true;
-              scope.pageCount = '?';
-
-            
+              scope.pageCount = '?';   
           
               resource.query({ limit: scope.resultsPerPage }, function(success) {
                  scope.list = success.users;
