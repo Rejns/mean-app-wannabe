@@ -21,10 +21,12 @@
 <div class="container">
 	<h3>Latest posts</h3>
 </div>
-<div ng-repeat="post in posts" class="container" ng-hide="loading">
-	<div post></div>
-</div>
 <div class="container">
-<div id="loader" ng-show="loading"></div>
-<div ng-show="loading">loading posts ... </div>
+  <div infinite-scroll='loadMore()' infinite-scroll-distance='0' class="container" infinite-scroll-disabled="stopped">
+  	<div ng-repeat="post in posts" >
+		<post></post>
+	</div>
+  </div>
 </div>
+
+

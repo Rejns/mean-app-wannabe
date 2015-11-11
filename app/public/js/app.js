@@ -1,4 +1,4 @@
-angular.module("app",["ngRoute","ngStorage","ngResource"])
+angular.module("app",["ngRoute","ngStorage","ngResource","infinite-scroll"])
 	.config(function($routeProvider){
 		$routeProvider
 			.when('/login', {

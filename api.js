@@ -168,9 +168,21 @@ app.get('/api/users', function(req, res) {
 });
 
 app.get('/api/posts', function(req, res) {
-	Post.find(function(err, posts) {
-		res.json(posts);
-	})
+
+	Post.paginate({}, req.query.page, req.query.limit, function(err, pageCount, posts, itemCount){
+		 var pageCount = pageCount;
+		 Post.paginate({}, pageCount - req.query.page+1, req.query.limit, function(err, pageCount, posts, itemCount) {
+		 	
+		 	var posts = posts;
+
+		 	/*if(posts.length < req.query.limit) {
+		 		Post.paginate({}, pageCount - req.query.page, req.query.limit, function()err, pageCount, posts, itemCount) {
+
+		 		});
+		 	}*/
+		 	res.json(posts);
+		 });
+	});
 });
 
 app.post('/api/posts/create', function(req, res) {
