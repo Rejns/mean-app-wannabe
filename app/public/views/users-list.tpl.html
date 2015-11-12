@@ -12,7 +12,18 @@
 	    </select>
     </div>
 	<pagination num-pages="numPages" current-page="1" list="list" resource="user" results-per-page="results.selected.value"></pagination>
-    <div ng-repeat="user in list">
-      <li>{{ user.username }}</li>
-    </div>
+	<table class="table table-condensed">
+		<thead>
+			<th>Username</th>
+			<th>Access</th>
+			<th>Actions</th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in list">
+				<td>{{ user.username }}</td>
+				<td>{{ user.access }}</td>
+				<td><button class="btn btn-default crud">delete</button><button class="btn btn-default crud">edit</button></td>
+			</tr>
+		</tbody>
+    </table>
 </div>

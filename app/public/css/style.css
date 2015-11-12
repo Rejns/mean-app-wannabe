@@ -20,3 +20,12 @@
 li {
 	cursor: pointer;
 }
+
+table {
+	table-layout: fixed;
+}
+
+.crud {
+	width:70px;
+	margin-right: 10px;
+}

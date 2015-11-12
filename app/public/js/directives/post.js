@@ -14,7 +14,7 @@ angular.module("app")
 				if(security.isAdmin()) {
 					element.html('<div>\
 						  <div class="page-header">\
-						    <button>delete</button>\
+						    <button class="btn btn-default">delete</button>\
 							<h3><small>'+scope.post.created.hours+':'+scope.post.created.minutes+' '+scope.post.created.date+' from <b>'+scope.post.author+'</b></small></h3>\
 					      </div>\
 					      <div class="jumbotron" style="padding:15px;">'
