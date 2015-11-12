@@ -48,7 +48,7 @@ angular.module("app")
 
 		$scope.posts = [];
 		var page = 1;
-		var limit = 1;
+		var limit = 10;
 		$scope.stopped = true;
 		bodyWatcher();
 
