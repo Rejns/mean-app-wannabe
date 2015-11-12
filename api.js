@@ -52,7 +52,7 @@ app.post('/api/authenticate', function(req, res) {
 	});
 });
 
-app.post('/api/register', function(req, res) {
+app.post('/api/users', function(req, res) {
 	var user = new User({
 			username: req.body.username,
 			password: req.body.password,
@@ -85,7 +85,7 @@ app.get('/api/users/:user', function(req, res) {
 		res.sendStatus(400);
 });
 
-app.post('/api/create', function(req, res) {
+app.post('/api/users', function(req, res) {
 	if(req.headers.authorization !== undefined) {
 		var token = req.headers.authorization.split(' ')[1];
 		jwt.verify(token, 'secret', function(err, decoded) {
@@ -112,7 +112,7 @@ app.post('/api/create', function(req, res) {
 		res.sendStatus(400);
 });
 
-app.delete('/api/delete/:user', function(req, res) {
+app.delete('/api/users/:user', function(req, res) {
 	if(req.headers.authorization !== undefined) {
 		var token = req.headers.authorization.split(' ')[1];
 		jwt.verify(token, 'secret', function(err, decoded) {
@@ -168,24 +168,16 @@ app.get('/api/users', function(req, res) {
 });
 
 app.get('/api/posts', function(req, res) {
-
 	Post.paginate({}, req.query.page, req.query.limit, function(err, pageCount, posts, itemCount){
 		 var pageCount = pageCount;
 		 Post.paginate({}, pageCount - req.query.page+1, req.query.limit, function(err, pageCount, posts, itemCount) {
-		 	
 		 	var posts = posts;
-
-		 	/*if(posts.length < req.query.limit) {
-		 		Post.paginate({}, pageCount - req.query.page, req.query.limit, function()err, pageCount, posts, itemCount) {
-
-		 		});
-		 	}*/
 		 	res.json(posts);
 		 });
 	});
 });
 
-app.post('/api/posts/create', function(req, res) {
+app.post('/api/posts', function(req, res) {
 	if(req.headers.authorization !== undefined) {
 		var token = req.headers.authorization.split(' ')[1];
 		jwt.verify(token, 'secret', function(err, decoded) {
@@ -210,7 +202,7 @@ app.post('/api/posts/create', function(req, res) {
 		res.sendStatus(400);
 });
 
-app.delete('/api/posts/delete/:id', function(req, res) {
+app.delete('/api/posts/:id', function(req, res) {
 	if(req.headers.authorization !== undefined) {
 		var token = req.headers.authorization.split(' ')[1];
 		jwt.verify(token, 'secret', function(err, decoded) {
