@@ -1,5 +1,5 @@
 angular.module("app")
-	.controller("HeaderController", ["$scope", "security","$localStorage","$location","Users", function($scope, security, $localStorage, $location, users) {
+	.controller("HeaderController", ["$scope", "security","$localStorage","$location",function($scope, security, $localStorage, $location) {
 		
 		$scope.appName = "My awesome app";
 		$scope.security = security;

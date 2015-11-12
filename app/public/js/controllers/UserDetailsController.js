@@ -1,5 +1,5 @@
 angular.module("app")
-	.controller("UserDetailsController", ["Users","security","$location","$scope","$localStorage", function(users, security, $location, $scope, $localStorage) {
+	.controller("UserDetailsController", ["User","security","$location","$scope","$localStorage", function(User, security, $location, $scope, $localStorage) {
 
 		var initialWatch = true;
 
@@ -16,9 +16,10 @@ angular.module("app")
 		$scope.isAdmin = false;
 		
 		$scope.loading = true;
-		users.getOne(user).then(function(response){
-			$scope.username = response.data.username;
-			$scope.access = response.data.access;
+		User.get({ user : user }, 
+		function(response){
+			$scope.username = response.username;
+			$scope.access = response.access;
 			$scope.loading = false;
 		}, function(error) {
 			$scope.loading = false;

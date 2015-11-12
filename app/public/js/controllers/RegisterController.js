@@ -1,12 +1,11 @@
 angular.module("app")
-	.controller("RegisterController", ["$scope","Users", function($scope, users) {
+	.controller("RegisterController", ["$scope","User", function($scope, User) {	
 		$scope.username = "username";
 		$scope.password = "password";
-		$scope.register = register;
 
-		function register() {
-			users.register($scope.username, $scope.password)
-				.then(function(response) {
+		$scope.register = function() {
+			User.save({}, { username: $scope.username, password : $scope.password}, 
+				function(response) {
 					$scope.message = "Registration successful";
 				}, function(error) {
 					$scope.message = "Registration failed";

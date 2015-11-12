@@ -1,5 +1,5 @@
 angular.module("app")
-	.controller("UsersListController", ["$scope", "Users", "security","$location","$localStorage","User", function($scope, Users, security, $location, $localStorage, User){
+	.controller("UsersListController", ["$scope", "User", "security","$location","$localStorage","User", function($scope, User, security, $location, $localStorage, User){
 		
 		$scope.isAdmin = false;
 		var initialWatch = true;
@@ -23,7 +23,8 @@ angular.module("app")
 			$scope.errorMessage = "unauthorized access";
 
 		$scope.delete = function(index, username) {
-			Users.delete(username).then(function(response) {
+			User.delete({user: username },
+			function(response) {
 				$scope.list.splice(index, 1);
 			}, function(error) {
 

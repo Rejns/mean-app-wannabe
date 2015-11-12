@@ -1,5 +1,5 @@
 angular.module("app")
-	.directive("post", ["security","Posts", function(security, posts) {
+	.directive("post", ["security","Posts", function(security, Posts) {
 		return {
 			scope: true,
 			template: '<div>\
@@ -24,10 +24,12 @@ angular.module("app")
 					element.find("button")[0].onclick = function() {
 						scope.deletingPost = true;
 						element.html('<div><div id="loader" ng-show="deletingPost"></div><div ng-show="deletingPost">deleting post ... </div></div>')
-						posts.delete(scope.post._id).then(function(response) {
+						Posts.delete({ postId : scope.post._id }, 
+						function(response) {
 							element.html('');
 							scope.deletingPost = false;
-						}, function(error) {
+						}, 
+						function(error) {
 							console.log(error);
 						});
 					}

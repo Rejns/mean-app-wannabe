@@ -1,5 +1,5 @@
 angular.module("app")
-	.controller("HomeController", ["security", "$localStorage", "$scope","Posts","$q","$document","$window", function(security, $localStorage, $scope, posts, $q, $document, $window) {
+	.controller("HomeController", ["security", "$localStorage", "$scope","Posts","$q","$document","$window", function(security, $localStorage, $scope, Posts, $q, $document, $window) {
 		
 		$scope.comment = "write your comment here";
 		$scope.post = post;
@@ -24,15 +24,15 @@ angular.module("app")
 
 		function post() {
 			$scope.creatingPost = true;
-			posts.create(security.getCurrentUser(),$scope.comment)
-			.then(function(response) {
+			Posts.save({}, { author : security.getCurrentUser(), message : $scope.comment }, 
+			function(response) {
 				$scope.creatingPost = false;
-				var date = new Date(response.data.created);
+				var date = new Date(response.created);
 				date = { hours: addZero(date.getHours()), 
 						 minutes: addZero(date.getMinutes()),
 					     date: addZero(date.getDate())+'/'+ addZero((date.getMonth()+1))+'/'+addZero(date.getFullYear())
 						};
-				var post = response.data;
+				var post = response;
 				post.created = date;
 				$scope.posts.unshift(post);
 			}, function(error) {
@@ -64,19 +64,18 @@ angular.module("app")
 					});
 				}
 				else {
-					$scope.stopped = false;
 					limit = 5;
+					$scope.stopped = false;	
 				}
 			});
 		}
 
 		$scope.loadMore = function() {
 			var deferred = $q.defer();	
-			posts.getAll(page, limit)
-			.then(
+			Posts.query({ page: page , limit : limit }, 
 			function(response) {
-				if(response.data !== "") {
-					var posts = response.data;
+				if(response.data !== []) {
+					var posts = response;
 					for(var i = 0; i < posts.length; i++) {
 						var date = new Date(posts[i].created);
 						date = { hours: addZero(date.getHours()), 
