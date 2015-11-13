@@ -1,4 +1,11 @@
-angular.module("app")
+angular.module("register", ["user", "ngRoute"])
+	.config(function($routeProvider){
+		$routeProvider
+			.when('/register', {
+				templateUrl: 'components/register/register.tpl.html',
+				controller: 'RegisterController' 
+			})
+	})
 	.controller("RegisterController", ["$scope","User", function($scope, User) {	
 		$scope.username = "username";
 		$scope.password = "password";

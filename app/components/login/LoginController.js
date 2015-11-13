@@ -1,4 +1,11 @@
-angular.module("app")
+angular.module("login", ["security", "ngStorage", "ngRoute"])
+	.config(function($routeProvider){
+		$routeProvider
+			.when('/login', {
+				templateUrl: 'components/login/login.tpl.html',
+				controller: 'LoginController'
+			});
+	})
 	.controller("LoginController", ["$scope", "security", "$location","$localStorage", function($scope, security, $location, $localStorage) {
 		
 

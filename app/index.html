@@ -2,32 +2,33 @@
 <html>
 <head>
 	<title></title>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<script type="text/javascript" src="js/core/jquery.js"></script>
-<script type="text/javascript" src="js/core/bootstrap.js"></script>
-<script type="text/javascript" src="js/core/angular.js"></script>
-<script type="text/javascript" src="js/core/angular-route.js"></script>
-<script type="text/javascript" src="js/core/ngStorage.js"></script>
-<script type="text/javascript" src="js/core/angular-resource.js"></script>
-<script type="text/javascript" src="js/core/ng-infinite-scroll.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
-<script type="text/javascript" src="js/controllers/HomeController.js"></script>
-<script type="text/javascript" src="js/controllers/LoginController.js"></script>
-<script type="text/javascript" src="js/controllers/UserDetailsController.js"></script>
-<script type="text/javascript" src="js/controllers/HeaderController.js"></script>
-<script type="text/javascript" src="js/controllers/UsersListController.js"></script>
-<script type="text/javascript" src="js/controllers/CreateUserController.js"></script>
-<script type="text/javascript" src="js/controllers/RegisterController.js"></script>
-<script type="text/javascript" src="js/services/security.js"></script>
-<script type="text/javascript" src="js/services/interceptor.js"></script>
-<script type="text/javascript" src="js/services/users.js"></script>
-<script type="text/javascript" src="js/services/posts.js"></script>
-<script type="text/javascript" src="js/directives/post.js"></script>
-<script type="text/javascript" src="js/directives/pagination.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<script type="text/javascript" src="assets/js/jquery.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="core/angular.js"></script>
+<script type="text/javascript" src="core/angular-route.js"></script>
+<script type="text/javascript" src="core/ngStorage.js"></script>
+<script type="text/javascript" src="core/angular-resource.js"></script>
+<script type="text/javascript" src="core/ng-infinite-scroll.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="components/home/HomeController.js"></script>
+<script type="text/javascript" src="components/login/LoginController.js"></script>
+<script type="text/javascript" src="components/details/UserDetailsController.js"></script>
+<script type="text/javascript" src="components/header/HeaderController.js"></script>
+<script type="text/javascript" src="components/list/UsersListController.js"></script>
+<script type="text/javascript" src="components/create/CreateUserController.js"></script>
+<script type="text/javascript" src="components/register/RegisterController.js"></script>
+<script type="text/javascript" src="components/components.js"></script>
+<script type="text/javascript" src="reusable/security/security.js"></script>
+<script type="text/javascript" src="reusable/interceptor/interceptor.js"></script>
+<script type="text/javascript" src="reusable/models/user/user.js"></script>
+<script type="text/javascript" src="reusable/models/post/post.js"></script>
+<script type="text/javascript" src="reusable/posts/posts.js"></script>
+<script type="text/javascript" src="reusable/pagination/pagination.js"></script>
 </head>
 <body ng-app="app">
-<div ng-include="'views/header.tpl.html'"></div>
+<div ng-include="'components/header/header.tpl.html'"></div>
 <div ng-view></div>
 </body>
 </html>

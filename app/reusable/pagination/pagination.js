@@ -1,4 +1,4 @@
-angular.module('app')
+angular.module('pagination', [])
   .directive("pagination", ["$parse", function($parse) {
       return {
         restrict: 'E',
@@ -9,22 +9,7 @@ angular.module('app')
           resultsPerPage: '='
         },
         replace: true,
-        template: '<ul class="pagination" ng-hide="loading">\
-                  <li ng-class="{disabled: noPrevious()}">\
-                  <a ng-click="selectPrevious()">Previous</a>\
-                  <li ng-hide="forward"><a ng-click=changeDirection()> 1 </a></li>\
-                  <li ng-hide="forward"><a > ... </a></li>\
-                  </li>\
-                  <li ng-repeat="page in pages"\
-                  ng-class="{active: isActive(page)}">\
-                  <a ng-click="selectPage(page)">{{page}}</a>\
-                  </li>\
-                  <li ng-show="forward"><a > ... </a></li>\
-                  <li ng-show="forward"><a ng-click=changeDirection()>  {{ pageCount }} </a></li>\
-                  <li ng-class="{disabled: noNext()}">\
-                  <a ng-click="selectNext()">Next</a>\
-                  </li>\
-                  </ul>',
+        templateUrl: 'reusable/pagination/pagination.tpl.html',
         link: function(scope, element, attrs) {
               scope.loading = true;
               var initialNumPages = scope.numPages; //save max number of pages in paginator

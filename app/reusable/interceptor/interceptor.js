@@ -1,4 +1,4 @@
-angular.module("app")
+angular.module("interceptor", ["ngStorage"])
 	.factory("interceptor", ["$localStorage", function($localStorage){
 		return {
 			request: function(config) {

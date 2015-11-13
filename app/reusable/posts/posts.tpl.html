@@ -1,0 +1,12 @@
+<div infinite-scroll="loadMore()" infinite-scroll-distance="0"  infinite-scroll-disabled="stopped">
+	<div ng-transclude></div>
+	<div ng-repeat="post in posts">
+	  <button class="btn btn-default" ng-show="admin" ng-click="deletePost(post._id)">delete</button>
+	  <div class="page-header">
+		<h3><small>{{ post.created.hours }} : {{ post.created.minutes }} {{ post.created.date }} from <b> {{ post.author }} </b></small></h3>
+	  </div>
+	  <div class="jumbotron" style="padding:15px;">
+	    {{ post.message }}
+	  </div>
+	</div>
+</div>

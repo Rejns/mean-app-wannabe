@@ -1,5 +1,12 @@
-angular.module("app")
-	.controller("HomeController", ["security", "$localStorage", "$scope","Posts","$q","$document","$window", function(security, $localStorage, $scope, Posts, $q, $document, $window) {
+angular.module("home", ['security', 'ngStorage', 'post','posts', "ngRoute"]) 
+	.config(function($routeProvider){
+		$routeProvider
+			.when('/home', {
+				templateUrl: 'components/home/home.tpl.html',
+				controller: 'HomeController'
+			})
+	})
+	.controller("HomeController", ["security", "$localStorage", "$scope","Posts", function(security, $localStorage, $scope, Posts) {
 		
 		$scope.comment = "write your comment here";
 		$scope.post = post;

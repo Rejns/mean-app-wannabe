@@ -1,4 +1,11 @@
-angular.module("app")
+angular.module("create", ["ngStorage", "user", "security", "ngRoute"])
+	.config(function($routeProvider){
+		$routeProvider
+			.when('/create-user', {
+				templateUrl: 'components/create/create-user.tpl.html',
+				controller: 'CreateUserController'
+			})
+	})
 	.controller("CreateUserController", ["$scope","$localStorage","$location","User","security", function($scope, $localStorage, $location, User, security) {
 		
 		$scope.username = "new username";
