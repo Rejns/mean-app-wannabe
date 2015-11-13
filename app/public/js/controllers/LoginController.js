@@ -1,5 +1,5 @@
 angular.module("app")
-	.controller("LoginController", ["$scope", "security", "Users", "$location","$localStorage", function($scope, security, users, $location, $localStorage) {
+	.controller("LoginController", ["$scope", "security", "$location","$localStorage", function($scope, security, $location, $localStorage) {
 		
 
 		$scope.$watch(function() {

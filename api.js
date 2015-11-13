@@ -169,8 +169,9 @@ app.get('/api/users', function(req, res) {
 
 app.get('/api/posts', function(req, res) {
 	Post.paginate({}, req.query.page, req.query.limit, function(err, pageCount, posts, itemCount){
-		 var pageCount = pageCount;
 		 Post.paginate({}, pageCount - req.query.page+1, req.query.limit, function(err, pageCount, posts, itemCount) {
+		 	if(err)
+		 		console.log(err);
 		 	var posts = posts;
 		 	res.json(posts);
 		 });

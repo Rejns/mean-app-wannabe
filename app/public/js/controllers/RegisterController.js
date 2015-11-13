@@ -4,7 +4,7 @@ angular.module("app")
 		$scope.password = "password";
 
 		$scope.register = function() {
-			User.save({}, { username: $scope.username, password : $scope.password}, 
+			User.save({}, { username: $scope.username, password : $scope.password }, 
 				function(response) {
 					$scope.message = "Registration successful";
 				}, function(error) {

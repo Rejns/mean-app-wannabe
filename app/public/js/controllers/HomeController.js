@@ -3,6 +3,7 @@ angular.module("app")
 		
 		$scope.comment = "write your comment here";
 		$scope.post = post;
+		$scope.isAdmin = security.isAdmin();
 
 		$scope.$watch(function() {
 			return security.getCurrentUser();
@@ -40,59 +41,12 @@ angular.module("app")
 			});
 		}
 
+		$scope.posts = [];
+
 		function addZero(i) {
 		    if (i < 10) 
 		        i = "0" + i;
 		    return i;
-		}
-
-		$scope.posts = [];
-		var page = 1;
-		var limit = 10;
-		$scope.stopped = true;
-		bodyWatcher();
-
-		function bodyWatcher() {
-			var unregister = $scope.$watch(function() {
-				return angular.element('body')[0].offsetHeight;
-			}, 
-			function(val) {
-				if(val <= $window.innerHeight) {
-					unregister();
-					$scope.loadMore().then(function() {
-						bodyWatcher();
-					});
-				}
-				else {
-					limit = 5;
-					$scope.stopped = false;	
-				}
-			});
-		}
-
-		$scope.loadMore = function() {
-			var deferred = $q.defer();	
-			Posts.query({ page: page , limit : limit }, 
-			function(response) {
-				if(response.data !== []) {
-					var posts = response;
-					for(var i = 0; i < posts.length; i++) {
-						var date = new Date(posts[i].created);
-						date = { hours: addZero(date.getHours()), 
-							 minutes: addZero(date.getMinutes()),
-						     date: addZero(date.getDate())+'/'+ addZero((date.getMonth()+1))+'/'+addZero(date.getFullYear())
-							};
-						posts[i].created = date;
-					}
-					$scope.posts = $scope.posts.concat(posts.reverse());
-				}
-				page++;	
-				deferred.resolve();
-			}, 
-			function(error) {
-				console.log(error);
-			});
-			return deferred.promise;
-		};
+		}	
 
 	}]);
