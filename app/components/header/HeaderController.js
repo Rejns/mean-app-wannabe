@@ -1,4 +1,4 @@
-angular.module("app")
+angular.module("header", ["security", "ngStorage"])
 	.controller("HeaderController", ["$scope", "security","$localStorage","$location",function($scope, security, $localStorage, $location) {
 		
 		$scope.appName = "My awesome app";

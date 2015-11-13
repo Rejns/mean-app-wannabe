@@ -1,4 +1,11 @@
-angular.module("app")
+angular.module("details", ["user", "security", "ngStorage", "ngRoute"])
+	.config(function($routeProvider){
+		$routeProvider
+			.when('/user-details/:username', {
+				templateUrl: 'components/details/user-details.tpl.html',
+				controller: 'UserDetailsController'
+			});
+	})
 	.controller("UserDetailsController", ["User","security","$location","$scope","$localStorage", function(User, security, $location, $scope, $localStorage) {
 
 		var initialWatch = true;

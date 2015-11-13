@@ -1,4 +1,4 @@
-angular.module("app")
+angular.module("security", ["ngStorage"])
 	.service("security", ["$http", "$localStorage","$q","$rootScope", function($http, $localStorage, $q, $rootScope) {
 
 		var currentUser = $localStorage.user || null;

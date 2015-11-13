@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-app.use(express.static(__dirname+'/app/public'));
+app.use(express.static(__dirname+'/app'));
 app.use(paginate.middleware(10, 50));
 
 app.post('/api/authenticate', function(req, res) {	

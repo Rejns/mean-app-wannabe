@@ -1,5 +1,12 @@
-angular.module("app")
-	.controller("UsersListController", ["$scope", "User", "security","$location","$localStorage","User", function($scope, User, security, $location, $localStorage, User){
+angular.module("list", ["security", "ngStorage", "user", "pagination", "ngRoute"])
+	.config(function($routeProvider){
+		$routeProvider
+			.when('/users-list', {
+				templateUrl: 'components/list/users-list.tpl.html',
+				controller: 'UsersListController'
+			})
+	})
+	.controller("UsersListController", ["$scope", "security","$location","$localStorage","User", function($scope, security, $location, $localStorage, User){
 		
 		$scope.isAdmin = false;
 		var initialWatch = true;
