@@ -1,5 +1,5 @@
 {
-  "name": "mean app",
+  "name": "mean-app",
   "version": "1.0.0",
   "description": "mean app simulating simple twitter using some cool javascript technologies",
   "main": "api.js",
