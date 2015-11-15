@@ -1,7 +1,8 @@
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose-paginate');
+var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 var paginate = require('express-paginate');
 var app = express();
  
@@ -9,22 +10,24 @@ var app = express();
 
 db = mongoose.connect("rejns:a1s2d3f4@ds045604.mongolab.com:45604/app-data");
 var Schema = mongoose.Schema;
-var User = new Schema({
+var userSchema = new Schema({
   username    : String,
   password	  : String,
   access	  : String,
 }, {collection: 'users'});
-mongoose.model('User', User);
+userSchema.plugin(mongoosePaginate);
+mongoose.model('User', userSchema);
 var User = mongoose.model('User');
 
 
-var Post = new Schema({
+var postSchema = new Schema({
 	author: String,
 	message: String,
 	created: Date
 
 }, {collection: 'posts'});
-mongoose.model('Post',Post);
+postSchema.plugin(mongoosePaginate);
+mongoose.model('Post',postSchema);
 var Post = mongoose.model('Post');
 
 

@@ -1,7 +1,7 @@
 {
-  "name": "express-jwt-api",
+  "name": "mean app",
   "version": "1.0.0",
-  "description": "express api using jwt auth",
+  "description": "mean app simulating simple twitter using some cool javascript technologies",
   "main": "api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,6 +17,7 @@
     "express": "^4.13.3",
     "express-paginate": "^0.1.0",
     "jsonwebtoken": "^5.4.1",
-    "mongoose": "^4.2.5"
+    "mongoose": "^4.2.5",
+    "mongoose-paginate": "3.1.3"
   }
 }
