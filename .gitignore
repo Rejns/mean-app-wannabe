@@ -1,4 +1,5 @@
 #exlcude node_modules folder from tracking
 /node_modules
+/bower_components
 
 
