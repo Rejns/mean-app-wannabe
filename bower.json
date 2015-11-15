@@ -1,0 +1,28 @@
+{
+  "name": "express-jwt-api",
+  "description": "express api using jwt auth",
+  "main": "server.js",
+  "authors": [
+    "rejns"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Rejns/mean-app-wannabe",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ngInfiniteScroll": "~1.2.1",
+    "angular-route": "~1.4.7",
+    "ngstorage": "~0.3.10",
+    "angular": "~1.4.7",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "angular-resource": "~1.4.7"
+  }
+}
