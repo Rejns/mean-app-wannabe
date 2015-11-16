@@ -11,7 +11,8 @@ angular.module("register", ["user", "ngRoute"])
 		$scope.password = "password";
 
 		$scope.register = function() {
-			User.save({}, { username: $scope.username, password : $scope.password }, 
+			//also send type to distingiush between registering and creating user
+			User.save({}, { username: $scope.username, password : $scope.password, type : "register" }, 
 				function(response) {
 					$scope.message = "Registration successful";
 				}, function(error) {

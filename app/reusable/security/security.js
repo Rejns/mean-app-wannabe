@@ -16,7 +16,7 @@ angular.module("security", ["ngStorage"])
 
 		this.login = function(username, password) {
 			var deferred = $q.defer();
-			$http.post("/api/authenticate", { username: username, password: password })
+			$http.post("/api/authenticate", { username: username, password: password, type: "login" })
 				.then(function(response) {
 					if(response.data.token !== 'undefined') {
 						$localStorage.token = response.data.token;
