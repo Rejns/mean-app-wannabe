@@ -15,8 +15,22 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname+'/../app'));
 //this way we do not expose our server directory structure
+app.use(express.static(__dirname+'/../app/src'));
+app.use('/components', express.static(__dirname+'/../app/src/components/create/'));
+app.use('/components', express.static(__dirname+'/../app/src/components/login/'));
+app.use('/components', express.static(__dirname+'/../app/src/components/register/'));
+app.use('/components', express.static(__dirname+'/../app/src/components/home/'));
+app.use('/components', express.static(__dirname+'/../app/src/components/list/'));
+app.use('/components', express.static(__dirname+'/../app/src/components/details/'));
+app.use('/components', express.static(__dirname+'/../app/src/components/header/'));
+app.use('/components', express.static(__dirname+'/../app/src/reusable/interceptor/'));
+app.use('/components', express.static(__dirname+'/../app/src/reusable/models/post/'));
+app.use('/components', express.static(__dirname+'/../app/src/reusable/models/user/'));
+app.use('/components', express.static(__dirname+'/../app/src/reusable/pagination/'));
+app.use('/components', express.static(__dirname+'/../app/src/reusable/posts/'));
+app.use('/components', express.static(__dirname+'/../app/src/reusable/security/'));
+app.use('/css', express.static(__dirname+'/../app/assets/css'));
 app.use('/scripts', express.static(__dirname+'/../bower_components/angular/'));
 app.use('/scripts', express.static(__dirname+'/../bower_components/angular-route/'));
 app.use('/scripts', express.static(__dirname+'/../bower_components/ngstorage/'));
@@ -37,7 +51,8 @@ app.use('/api/authenticate', userRouter);
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
 app.get('/', function(req, res) {
-	res.sendFile(__dirname+'/../app/index.html');
+	var path = require('path');
+	res.sendFile(path.resolve(__dirname+'/../app/index.html'));
 });
 
 app.listen(3000);
