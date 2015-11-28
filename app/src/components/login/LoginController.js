@@ -19,8 +19,8 @@ angular.module("login", ["security", "ngStorage", "ngRoute"])
 		if(security.isAuthenticated() && $localStorage.token !== null) 
 			$location.path('/home');
 
-		$scope.username ="username";
-		$scope.password ="password";
+		$scope.username ="";
+		$scope.password ="";
 		$scope.login = login;
 		$scope.loading = false;
 

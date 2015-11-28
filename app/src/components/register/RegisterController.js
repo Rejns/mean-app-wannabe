@@ -7,8 +7,8 @@ angular.module("register", ["user", "ngRoute"])
 			})
 	})
 	.controller("RegisterController", ["$scope","User", function($scope, User) {	
-		$scope.username = "username";
-		$scope.password = "password";
+		$scope.username = "";
+		$scope.password = "";
 
 		$scope.register = function() {
 			//also send type to distingiush between registering and creating user

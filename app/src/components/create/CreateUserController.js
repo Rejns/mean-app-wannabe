@@ -8,9 +8,9 @@ angular.module("create", ["ngStorage", "user", "security", "ngRoute"])
 	})
 	.controller("CreateUserController", ["$scope","$localStorage","$location","User","security", function($scope, $localStorage, $location, User, security) {
 		
-		$scope.username = "new username";
-		$scope.password = "new password";
-		$scope.access = "access";
+		$scope.username = "";
+		$scope.password = "";
+		$scope.access = "user";
 		$scope.add = add;
 		$scope.isAdmin = false;
 

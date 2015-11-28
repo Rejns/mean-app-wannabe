@@ -6,13 +6,13 @@
 	<div class="col-lg-6">
 	<form ng-submit="add()" ng-hide="loading">
 		<div class="form-group">
-			<input ng-model="username" class="form-control">
+			<input ng-model="username" placeholder="new username" class="form-control">
 		</div>
 		<div class="form-group">
-			<input ng-model="password" class="form-control">
+			<input ng-model="password" placeholder="new password" class="form-control">
 		</div>
 		<div class="form-group">
-			<input ng-model="access" class="form-control" />	
+			<label class="checkbox-inline"><input type="checkbox" ng-model="access" ng-true-value="'admin'" ng-false-value="'user'">enable admin permissions</label>	
 		</div>
 		<button type="submit" class="btn btn-default">add</button>
 	</form>

@@ -8,7 +8,7 @@ angular.module("home", ['security', 'ngStorage', 'post','posts', "ngRoute"])
 	})
 	.controller("HomeController", ["security", "$localStorage", "$scope","Posts", function(security, $localStorage, $scope, Posts) {
 		
-		$scope.comment = "write your comment here";
+		$scope.comment = "";
 		$scope.post = post;
 		$scope.isAdmin = security.isAdmin();
 
