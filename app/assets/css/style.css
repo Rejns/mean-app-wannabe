@@ -29,3 +29,31 @@ table {
 	width:70px;
 	margin-right: 10px;
 }
+
+.clearfix:after { 
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+
+.remove-button {
+	float:right; 
+	margin-top: 13px; 
+	color: gray;
+	transition:color 0.3s linear;
+}
+
+.remove-button:hover {
+	color:red;
+	transition:color 0.3s linear;
+}
+
+.page-header {
+	padding: 0;
+	margin-bottom:10px;
+}
+
+.container h2 {
+	margin-bottom:30px;
+}

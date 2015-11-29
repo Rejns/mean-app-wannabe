@@ -31,6 +31,7 @@ app.use('/components', express.static(__dirname+'/../app/src/reusable/pagination
 app.use('/components', express.static(__dirname+'/../app/src/reusable/posts/'));
 app.use('/components', express.static(__dirname+'/../app/src/reusable/security/'));
 app.use('/css', express.static(__dirname+'/../app/assets/css'));
+app.use('/images', express.static(__dirname+'/../app/assets/images'));
 app.use('/scripts', express.static(__dirname+'/../bower_components/angular/'));
 app.use('/scripts', express.static(__dirname+'/../bower_components/angular-route/'));
 app.use('/scripts', express.static(__dirname+'/../bower_components/ngstorage/'));
@@ -39,6 +40,7 @@ app.use('/scripts', express.static(__dirname+'/../bower_components/ngInfiniteScr
 app.use('/scripts', express.static(__dirname+'/../bower_components/jquery/dist/'));
 app.use('/scripts', express.static(__dirname+'/../bower_components/bootstrap/dist/js/'));
 app.use('/assets', express.static(__dirname+'/../bower_components/bootstrap/dist/css/'));
+app.use(express.static(__dirname+'/../bower_components/bootstrap/dist/'));
 
 app.use(paginate.middleware(10, 50));
 

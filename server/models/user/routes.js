@@ -28,7 +28,7 @@ router.get('/:user', security.checkUserAuthorization, function(req, res) {
 router.use(security.checkAdminAuthorization);
 
 router.get('/', function(req, res) {
-	User.paginate({}, req.query.page, req.query.limit, function(err, pageCount, users, itemCount) {
+	User.paginate({}, parseInt(req.query.page), parseInt(req.query.limit), function(err, pageCount, users, itemCount) {
 		res.json({ users: users, pageCount: pageCount });
 	});
 });

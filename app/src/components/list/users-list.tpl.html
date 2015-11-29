@@ -28,7 +28,7 @@
 			<tr ng-repeat="user in list">
 				<td>{{ user.username }}</td>
 				<td>{{ user.access }}</td>
-				<td><button class="btn btn-default crud" ng-click="delete($index, user.username)">delete</button><button class="btn btn-default crud">edit</button></td>
+				<td><button class="btn btn-danger crud" ng-click="delete($index, user.username)">delete</button><button class="btn btn-warning crud">edit</button></td>
 			</tr>
 		</tbody>
     </table>

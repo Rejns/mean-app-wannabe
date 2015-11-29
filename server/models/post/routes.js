@@ -7,17 +7,18 @@ var security = require('../../security/security');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-	Post.paginate({}, req.query.page, req.query.limit, function(err, pageCount, posts, itemCount){
-		 Post.paginate({}, pageCount - req.query.page+1, req.query.limit, function(err, pageCount, posts, itemCount) {
+	Post.paginate({}, req.query.page, req.query.limit, function(err, pageCount, posts, itemCount) {
+		Post.paginate({}, pageCount - req.query.page+1, req.query.limit, function(err, pageCount, posts, itemCount) {
 		 	if(err)
 		 		console.log(err);
 		 	res.json(posts);
-		 });
+		});
 	});
 });
 
 //apply token check for all next routes
 router.use(security.checkAuthentication)
+
 
 //apply checkUserAuthorization middleware to confirm user
 router.post('/', security.checkUserAuthorization, function(req, res) {

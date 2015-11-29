@@ -6,7 +6,6 @@ var postSchema = new Schema({
 	author: String,
 	message: String,
 	created: Date
-
 }, {collection: 'posts'});
 
 postSchema.plugin(mongoosePaginate);
