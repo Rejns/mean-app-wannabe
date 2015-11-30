@@ -1,5 +1,5 @@
 angular.module("posts", ["post", "infinite-scroll"])
-	.directive("posts", ["Posts","$document","$window","$q", function(Posts, $document, $window, $q) {
+	.directive("posts", ["Posts","$document","$window","$q", function(Posts, $document, $window) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -15,11 +15,11 @@ angular.module("posts", ["post", "infinite-scroll"])
 				var initial = true;
 				scope.stopped = false;
 
-					function addZero(i) {
-					    if (i < 10) 
-					        i = "0" + i;
-					    return i;
-					}
+				function addZero(i) {
+				    if (i < 10) 
+				        i = "0" + i;
+				    return i;
+				}
 
 				function findWithAttr(array, attr, value) {
 				    for(var i = 0; i < array.length; i += 1) {
@@ -39,12 +39,11 @@ angular.module("posts", ["post", "infinite-scroll"])
 				}		
 
 				scope.loadMore = function() {
-					var deferred = $q.defer();
 					scope.stopped = true; //prevent more loading until ajax req is completed
 					Posts.query({ page: page , limit : limit }, 
 					function(response) {
-						if(response !== []) {
-							scope.stopped = false;
+						console.log("response");
+						if(response !== []) {	
 							var posts = response;
 							for(var i = 0; i < posts.length; i++) {
 								var date = new Date(posts[i].created);
@@ -55,36 +54,15 @@ angular.module("posts", ["post", "infinite-scroll"])
 								posts[i].created = date;
 							}
 							scope.posts = scope.posts.concat(posts.reverse());
-							
 						}
 						page++;
-						deferred.resolve();
-						if(initial === true) {
-							initial = false;
-							bodyWatcher();	
-						}
 					}, 
 					function(error) {
 						console.log(error);
-					});
-					return deferred.promise;	
+					}).$promise.finally(function() {
+						scope.stopped = false;
+					});	
+				}
 			}
-
-			
-
-			function bodyWatcher() {
-				var unregister = scope.$watch(function() {
-					return angular.element('body')[0].offsetHeight;
-				}, 
-				function(val) {
-					if(val <= $window.innerHeight) {
-						unregister();
-						scope.loadMore().then(function() {
-							bodyWatcher();
-						});
-					}
-				});
-			}
-		}
 		}
 	}]);

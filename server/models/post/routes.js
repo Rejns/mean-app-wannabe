@@ -7,12 +7,15 @@ var security = require('../../security/security');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-	Post.paginate({}, req.query.page, req.query.limit, function(err, pageCount, posts, itemCount) {
-		Post.paginate({}, pageCount - req.query.page+1, req.query.limit, function(err, pageCount, posts, itemCount) {
-		 	if(err)
-		 		console.log(err);
-		 	res.json(posts);
-		});
+	console.log(req.query.page);
+	Post.paginate({}, { page: req.query.page, limit: req.query.limit }, function(err, posts, pageCount, itemCount) {
+		//check if requested page exists
+		if((pageCount - req.query.page+1) > 0 &&  (pageCount - req.query.page+1) <= pageCount)
+			Post.paginate({}, { page: pageCount - req.query.page+1, limit: req.query.limit, sortBy : { created: 1 } }, function(err, posts, pageCount, itemCount) {
+			 	if(err)
+			 		console.log(err);
+			 	res.json(posts);
+			});
 	});
 });
 
