@@ -34,6 +34,7 @@ angular.module("home", ['security', 'ngStorage', 'post','posts', "ngRoute"])
 			$scope.creatingPost = true;
 			Posts.save({}, { author : security.getCurrentUser(), message : $scope.comment }, 
 			function(response) {
+				$scope.comment = "";
 				$scope.creatingPost = false;
 				var date = new Date(response.created);
 				date = { hours: addZero(date.getHours()), 

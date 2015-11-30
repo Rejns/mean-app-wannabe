@@ -57,3 +57,7 @@ table {
 .container h2 {
 	margin-bottom:30px;
 }
+
+.jumbotron {
+	word-wrap: break-word;
+}
