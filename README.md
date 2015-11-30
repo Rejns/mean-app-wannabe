@@ -1,4 +1,4 @@
-Simple twitter app using some cool features and javascript technologies
+Simple MEAN application for writing posts using some cool features like JWT authentication, infinite-scroll and pagination.
 
 ## Installation
 Prior to installation make sure you have `node`, `git` and `bower` installed
