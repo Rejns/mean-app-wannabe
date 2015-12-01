@@ -11,4 +11,4 @@ Prior to installation make sure you have `node`, `git` and `bower` installed
 ##Running the app 
 1. go the server folder and run it by typing: `node api.js`
 2. visit `localhost:3000` in your browser
-3. admin access - username: rejns, password: a1s2d3f4
+3. admin access - username: rejns password: a1s2d3f4
