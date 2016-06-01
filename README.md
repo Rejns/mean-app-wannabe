@@ -1,6 +1,6 @@
 Simple MEAN application for writing posts using some cool features like JWT authentication, infinite-scroll and pagination.
 
-[DEMO](https://193.77.157.141:3000)
+[DEMO](http://193.77.157.141:3000)
 
 ## Installation
 Prior to installation make sure you have `node`, `git` and `bower` installed
